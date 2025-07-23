@@ -1,9 +1,3 @@
-console.log("Hello, World!");
-
-// write getComputerChoice function
-// return string: "rock", "paper", "scissors"
-// Math.random()
-
 function getComputerChoice() {
   let compChoice = Math.floor(Math.random() * 3);
 
@@ -16,58 +10,56 @@ function getComputerChoice() {
   }
 }
 
-// write getHumanChoice function
-// prompt() to get human input
-
 function getHumanChoice() {
   let humanInput = prompt("Rock, Paper, or Scissors?");
   return humanInput;
 }
 
-// create global variables: humanScore, computerScore to track
+function playRound(getHumanChoice) {
+  let human = getHumanChoice.toLowerCase();
+  let comp = getComputerChoice().toLowerCase();
 
-// write playRound function
-// input: humanChoice, computerChoice - case sensitive string
-// output: string - console.log() === "You lose! Paper beats Rock!"
-// increment global variables to track score
-
-// write playGame function
-// move playRound and score variables into playGame scope
-// play 5 rounds by calling playRound 5x
+  if (
+    (human === "rock" && comp === "paper") ||
+    (human === "paper" && comp === "scissors") ||
+    (human === "scissors" && comp === "rock")
+  ) {
+    console.log(`Computer Wins! Human: ${human}, Computer: ${comp}`);
+    // console.log(`You lose! ${comp} beats ${human}.`);
+    // computerScore++;
+  } else if (
+    (comp === "rock" && human === "paper") ||
+    (comp === "paper" && human === "scissors") ||
+    (comp === "scissors" && human === "rock")
+  ) {
+    console.log(`You Win! Human: ${human}, Computer: ${comp}`);
+    // console.log(`You win! ${human} beats ${comp}.`);
+    // humanScore++;
+  } else {
+    console.log(`Tie! ${human} and ${comp}.`);
+  }
+}
 
 function playGame() {
   let humanScore = 0;
   let computerScore = 0;
 
-  function playRound() {
-    let human = getHumanChoice().toLowerCase();
-    let comp = getComputerChoice().toLowerCase();
+  playRound();
+  // console.log(`Final Score. Human: ${humanScore} Computer: ${computerScore}`);
+}
 
-    if (
-      (human === "rock" && comp === "paper") ||
-      (human === "paper" && comp === "scissors") ||
-      (human === "scissors" && comp === "rock")
-    ) {
-      console.log(`You lose! ${comp} beats ${human}.`);
-      computerScore++;
-    } else if (
-      (comp === "rock" && human === "paper") ||
-      (comp === "paper" && human === "scissors") ||
-      (comp === "scissors" && human === "rock")
-    ) {
-      console.log(`You win! ${human} beats ${comp}.`);
-      humanScore++;
-    } else {
-      console.log(`Tie! ${human} and ${comp}.`);
-    }
-  }
+// UI DOM
+const div = document.createElement("div");
+document.body.append(div);
 
-  for (let i = 0; i < 5; i++) {
-    playRound();
-    console.log(
-      `The score is human: ${humanScore}, computer: ${computerScore}.`
-    );
-  }
+const buttonText = ["Rock", "Paper", "Scissors"];
 
-  console.log(`Final Score. Human: ${humanScore} Computer: ${computerScore}`);
+for (let i = 0; i < buttonText.length; i++) {
+  const button = document.createElement("button");
+  button.textContent = buttonText[i];
+  div.appendChild(button);
+  button.addEventListener("click", function () {
+    const humanChoice = buttonText[i];
+    playRound(humanChoice);
+  });
 }
