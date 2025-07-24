@@ -1,3 +1,6 @@
+let computerScore = 0;
+let humanScore = 0;
+
 function getComputerChoice() {
   let compChoice = Math.floor(Math.random() * 3);
 
@@ -13,8 +16,7 @@ function getComputerChoice() {
 function playRound(getHumanChoice) {
   const human = getHumanChoice.toLowerCase();
   const comp = getComputerChoice().toLowerCase();
-  let computerScore = 0;
-  let humanScore = 0;
+
   const p = document.createElement("p");
 
   if (
@@ -22,20 +24,30 @@ function playRound(getHumanChoice) {
     (human === "paper" && comp === "scissors") ||
     (human === "scissors" && comp === "rock")
   ) {
-    p.textContent = `Human: ${human}, Computer: ${comp}`;
-    div.appendChild(p);
     computerScore++;
+    p.textContent = `Computer won round. ${comp} beats ${human}. Human: ${humanScore}, Computer: ${computerScore}`;
   } else if (
     (comp === "rock" && human === "paper") ||
     (comp === "paper" && human === "scissors") ||
     (comp === "scissors" && human === "rock")
   ) {
-    p.textContent = `Human: ${human}, Computer: ${comp}`;
-    div.appendChild(p);
     humanScore++;
+    p.textContent = `Human won round. ${human} beats ${comp}. Human: ${humanScore}, Computer: ${computerScore}`;
   } else {
-    p.textContent = `Tie! ${human} and ${comp}.`;
-    div.appendChild(p);
+    p.textContent = `Tie! Both chose ${human}. Human: ${humanScore}, Computer: ${computerScore}`;
+  }
+  div.appendChild(p);
+
+  if (humanScore === 5) {
+    const winP = document.createElement("p");
+    winP.textContent = `🎉 Human Wins! Final Score = Human: ${humanScore} Computer: ${computerScore}`;
+    div.appendChild(winP);
+  }
+
+  if (computerScore === 5) {
+    const loseP = document.createElement("p");
+    loseP.textContent = `💻 Computer Wins! Final Score = Human: ${humanScore} Computer: ${computerScore}`;
+    div.appendChild(loseP);
   }
 }
 
