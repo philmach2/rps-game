@@ -57,7 +57,7 @@ const buttonText = ["Rock", "Paper", "Scissors"];
 for (let i = 0; i < buttonText.length; i++) {
   const button = document.createElement("button");
   button.textContent = buttonText[i];
-  div.appendChild(button);
+  document.body.append(button);
   button.addEventListener("click", function () {
     const humanChoice = buttonText[i];
     playRound(humanChoice);
