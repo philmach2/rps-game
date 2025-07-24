@@ -10,42 +10,33 @@ function getComputerChoice() {
   }
 }
 
-function getHumanChoice() {
-  let humanInput = prompt("Rock, Paper, or Scissors?");
-  return humanInput;
-}
-
 function playRound(getHumanChoice) {
-  let human = getHumanChoice.toLowerCase();
-  let comp = getComputerChoice().toLowerCase();
+  const human = getHumanChoice.toLowerCase();
+  const comp = getComputerChoice().toLowerCase();
+  let computerScore = 0;
+  let humanScore = 0;
+  const p = document.createElement("p");
 
   if (
     (human === "rock" && comp === "paper") ||
     (human === "paper" && comp === "scissors") ||
     (human === "scissors" && comp === "rock")
   ) {
-    console.log(`Computer Wins! Human: ${human}, Computer: ${comp}`);
-    // console.log(`You lose! ${comp} beats ${human}.`);
-    // computerScore++;
+    p.textContent = `Human: ${human}, Computer: ${comp}`;
+    div.appendChild(p);
+    computerScore++;
   } else if (
     (comp === "rock" && human === "paper") ||
     (comp === "paper" && human === "scissors") ||
     (comp === "scissors" && human === "rock")
   ) {
-    console.log(`You Win! Human: ${human}, Computer: ${comp}`);
-    // console.log(`You win! ${human} beats ${comp}.`);
-    // humanScore++;
+    p.textContent = `Human: ${human}, Computer: ${comp}`;
+    div.appendChild(p);
+    humanScore++;
   } else {
-    console.log(`Tie! ${human} and ${comp}.`);
+    p.textContent = `Tie! ${human} and ${comp}.`;
+    div.appendChild(p);
   }
-}
-
-function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
-
-  playRound();
-  // console.log(`Final Score. Human: ${humanScore} Computer: ${computerScore}`);
 }
 
 // UI DOM
